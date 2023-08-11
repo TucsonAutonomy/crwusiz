@@ -6,11 +6,11 @@ echo -n "0" > /data/params/d/PrebuiltEnable
 sudo rm -f prebuilt
 
 git fetch --all --prune
-git remote set-head origin -a
 
 BRANCH=$(cat /data/params/d/SelectedBranch)
+
 git reset --hard HEAD
-git checkout $BRANCH
+git checkout -b origin/$BRANCH
 
 echo ""
 echo "  Git Checkout [ $BRANCH ]  "
