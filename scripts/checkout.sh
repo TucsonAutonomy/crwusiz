@@ -10,7 +10,7 @@ git fetch --all --prune
 BRANCH=$(cat /data/params/d/SelectedBranch)
 
 git reset --hard HEAD
-git checkout -b origin/$BRANCH
+git checkout $BRANCH
 
 echo ""
 echo "  Git Checkout [ $BRANCH ]  "
