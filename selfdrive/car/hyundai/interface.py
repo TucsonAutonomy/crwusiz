@@ -74,6 +74,11 @@ class CarInterface(CarInterfaceBase):
       ret.wheelbase = 2.67
       ret.steerRatio = 16.0
       tire_stiffness_factor = 0.385
+    elif candidate == CAR.TUCSON_TL:
+      ret.mass = 1596. + STD_CARGO_KG
+      ret.wheelbase = 2.67
+      ret.steerRatio = 16.0
+      tire_stiffness_factor = 0.385
     elif candidate in [CAR.SANTAFE, CAR.SANTAFE_HEV]:
       ret.mass = 1910. + STD_CARGO_KG
       ret.wheelbase = 2.76
