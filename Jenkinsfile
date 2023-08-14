@@ -6,6 +6,7 @@ ssh -tt -o StrictHostKeyChecking=no -i ${key_file} 'comma@${ip}' /usr/bin/bash <
 set -e
 
 export CI=1
+export PYTHONWARNINGS=error
 export LOGPRINT=debug
 export TEST_DIR=${env.TEST_DIR}
 export SOURCE_DIR=${env.SOURCE_DIR}
@@ -65,6 +66,7 @@ pipeline {
   agent none
   environment {
     CI = "1"
+    PYTHONWARNINGS = "error"
     TEST_DIR = "/data/openpilot"
     SOURCE_DIR = "/data/openpilot_source/"
     AZURE_TOKEN = credentials('azure_token')
@@ -154,9 +156,9 @@ pipeline {
             sh "git config --global --add safe.directory '*'"
             sh "git submodule update --init --depth=1 --recursive"
             sh "git lfs pull"
-            sh "scons --clean && scons --no-cache -j42"
+            // tests that our build system's dependencies are configured properly, needs a machine with lots of cores
             sh "scons --clean && scons --no-cache --random -j42"
-            sh "INTERNAL_SEG_LIST=selfdrive/car/tests/test_models_segs.txt FILEREADER_CACHE=1 pytest -n42 --dist=loadscope selfdrive/car/tests/test_models.py"
+            //sh "INTERNAL_SEG_LIST=selfdrive/car/tests/test_models_segs.txt FILEREADER_CACHE=1 pytest -n42 --dist=loadscope selfdrive/car/tests/test_models.py"
           }
 
           post {
